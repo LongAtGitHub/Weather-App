@@ -1,4 +1,4 @@
-// main script
+// calling main
 main();
 
 /**
@@ -10,10 +10,13 @@ async function main()
     const data = await getWeather(lat, long);
     
     console.log(data.weather.id);
-    document.getElementById("country").innerHTML += data.sys.country;
-    document.getElementById("city").innerHTML += data.name;
-    document.getElementById("temperature").innerHTML += data.main.temp;
-    document.getElementById("weatherDesc").innerHTML += data.weather[0].description;
+    console.log(data.sys.country);
+    console.log(data.name);
+
+    // document.getElementById("country").innerHTML += data.sys.country;
+    // document.getElementById("city").innerHTML += data.name;
+    // document.getElementById("temperature").innerHTML += data.main.temp;
+    // document.getElementById("weatherDesc").innerHTML += data.weather[0].description;
     
 }
 
@@ -44,7 +47,8 @@ async function getWeather(lat, lon, units = "metric") {
     const apiUrl = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=${units}&appid=${apiKey}`;
     try {
         const response = await fetch(apiUrl);
-        const data = await response.json();        
+        const data = await response.json();  
+        console.log(data)      
         return data;
     }
     
