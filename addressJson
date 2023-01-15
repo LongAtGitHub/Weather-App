@@ -1,0 +1,83 @@
+ults
+: 
+Array(1)
+0
+: 
+address_line1
+: 
+"Macalester College"
+address_line2
+: 
+"1600 Grand Avenue, Saint Paul, MN 55105, United States of America"
+bbox
+: 
+{lon1: -93.1713942, lat1: 44.9343228, lon2: -93.1672242, lat2: 44.9412279}
+category
+: 
+"education.college"
+city
+: 
+"Saint Paul"
+country
+: 
+"United States"
+country_code
+: 
+"us"
+county
+: 
+"Ramsey County"
+datasource
+: 
+{sourcename: 'openstreetmap', attribution: '© OpenStreetMap contributors', license: 'Open Database License', url: 'https://www.openstreetmap.org/copyright'}
+distance
+: 
+0
+formatted
+: 
+"Macalester College, 1600 Grand Avenue, Saint Paul, MN 55105, United States of America"
+housenumber
+: 
+"1600"
+lat
+: 
+44.9376912
+lon
+: 
+-93.16928542442817
+name
+: 
+"Macalester College"
+place_id
+: 
+"51f1668892d54a57c0599edfe64306784640f00102f901bd412502000000009203124d6163616c657374657220436f6c6c656765"
+postcode
+: 
+"55105"
+rank
+: 
+{importance: 0.42537062388459207, popularity: 4.358866254089555}
+result_type
+: 
+"amenity"
+state
+: 
+"Minnesota"
+state_code
+: 
+"MN"
+street
+: 
+"Grand Avenue"
+suburb
+: 
+"Macalester - Groveland"
+timezone
+: 
+{name: 'America/Chicago', offset_STD: '-06:00', offset_STD_seconds: -21600, offset_DST: '-05:00', offset_DST_seconds: -18000, …}
+[[Prototype]]
+: 
+Object
+length
+: 
+1

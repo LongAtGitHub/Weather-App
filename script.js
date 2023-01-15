@@ -7,17 +7,12 @@ main();
 async function main()
 {
     const [lat, long] = await getLocation(); 
-    const data = await getWeather(lat, long);
-    
-    console.log(data.weather.id);
-    console.log(data.sys.country);
-    console.log(data.name);
+    const weatherData = await getWeather(lat, long);
 
-    // document.getElementById("country").innerHTML += data.sys.country;
-    // document.getElementById("city").innerHTML += data.name;
-    // document.getElementById("temperature").innerHTML += data.main.temp;
-    // document.getElementById("weatherDesc").innerHTML += data.weather[0].description;
-    
+    // addressData json cleaning
+    const addressData = await getExactAddress(lat, long);
+    const conciseAddr = getConciseAddr(addressData.results[0].country, addressData.results[0].state, addressData.results[0].city);
+    document.getElementById("location").innerHTML = conciseAddr;
 }
 
 /**
@@ -36,7 +31,7 @@ async function getLocation() {
   }
 
 /**
- * Get the info of a place given the lat and long using await
+ * Get the general info of a place given the lat and long using await
  * @param lat latitude of the location
  * @param long longitude of the location
  * @param units metrics or imperial, if left unfilled it would be metric
@@ -53,11 +48,47 @@ async function getWeather(lat, lon, units = "metric") {
     }
     
     catch (error) {
-        console.log("There are some errors with the API - Long");
+        console.log("OpenWeather API fails");
         console.log(error);
         return null;
     }
-    
+}
+
+/**
+ * This function outputs the visually appealing address
+ * @param lat 
+ * @param lon 
+ */
+async function getExactAddress(lat, lon) {
+  const apiKey = "b46097a613ab4e0189b194232e2de159";
+  apiUrl = `https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${lon}&format=json&apiKey=${apiKey}`;
+
+  try {
+    const response = await fetch(apiUrl);
+    const data = await response.json();  
+    console.log(data)      
+    return data;
+  }
+  catch (error) {
+    console.log("OpenWeather API fails");
+    console.log(error);
+    return null;
+  }
+}
+
+/**
+ * 
+ * @param {*} country 
+ * @param {*} state 
+ * @param {*} city 
+ * @returns the concise address
+ */
+function getConciseAddr(country, state, city) {
+  country = country || '';
+  state = state || '';
+  city = city || '';
+  conciseOutput = `${city}, ${state} - ${country}`;
+  return conciseOutput;
 }
 
   
