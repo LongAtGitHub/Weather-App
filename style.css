@@ -1,21 +1,74 @@
+
+
 body {
-    font-family: Georgia, serif;
+    font-family: Calibri,Candara,Segoe,Segoe UI,Optima, Arial,sans-serif; 
     text-align: center;
     background-color: #3E78B2;
+    font-size: 3em;
+    color: aliceblue;
 }
 
 /* Saint Paul, MN */
 #location {
     padding-top: 1em;
-    font-family: Arial, sans-serif;
-    font-size: 4em;
+    font-family: Calibri,Candara,Segoe,Segoe UI,Optima, Arial,sans-serif; 
     margin-bottom: 0em;
+    font-size: 1.5em;
     
 }
 
 .temperature-container {
-    padding-top: 1em;
+    padding-top: 0em;
     justify-content: center;
+    align-items: center;
     display: grid;
-    grid-template-columns: 4em 4em 4em;   
+    grid-template-columns: 6em 6.2em 6em;   
+}
+
+
+
+#imgIcon {
+    width: 5em;
+    height: 5em;
+}
+
+#temp {
+    font-size: 3em;
+    justify-content: center;
+    align-items: center;
+}
+
+#description {
+    padding-top: 0em;
+    font-size: 1.5em;
+}
+
+#update-time {
+    font-size: 0.5em;
+    padding-top: 0.5em;
+}
+
+.row1 {
+    font-size: 0.5em;
+    justify-content: center;
+    align-items: center;
+    display: grid;
+    grid-template-rows: 1fr; 
+    grid-template-columns: auto auto auto;
+    padding-top: 1em;
+}
+
+.row2 {
+    font-size: 0.5em;
+    justify-content: center;
+    align-items: center;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: auto auto auto;
+    padding-top: 0.25em;
+}
+
+
+.row-elem {
+    padding: 0em 1em 0em 1em;
 }

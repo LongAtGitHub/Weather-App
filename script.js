@@ -5,14 +5,38 @@ main();
  * main function
  */
 async function main() {
+  // Get the json object and Set up
+  let unit = localStorage.getItem("unit");
+  if (!unit) {
+    unit = "metric";
+  }
+  console.log(unit);
   const [lat, long] = await getLocation();
-  const weatherData = await getWeather(lat, long);
-
-  // addressData json cleaning
+  const weatherData = await getWeather(lat, long, unit);
+  console.log(weatherData);
   const addressData = await getExactAddress(lat, long);
-  console.log(addressData);
   const conciseAddr = getConciseAddr(addressData);
+  const airData = await getAirQuality(lat, long);
+  console.log(airData);
+  const airQualityMap = new Map();
+  airQualityMap.set(1, "Good");
+  airQualityMap.set(2, "Fair");
+  airQualityMap.set(3, "Moderate");
+  airQualityMap.set(4, "Poor");
+  airQualityMap.set(5, "Very Poor");
+  
+  // Change the html text display
   document.getElementById("location").innerHTML = conciseAddr;
+  document.getElementById("description").innerHTML = weatherData.weather[0].description;
+  const iconLink = `http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`
+  document.getElementById("imgIcon").src = iconLink;
+  let conciseTemp = Math.round(weatherData.main.temp * 10) / 10
+  document.getElementById("temp").innerHTML = conciseTemp;
+  document.getElementById("feels").innerHTML +=  weatherData.main.feels_like;
+  document.getElementById("windSpeed").innerHTML += weatherData.wind.speed;
+  document.getElementById("humidity").innerHTML += weatherData.main.humidity;
+  document.getElementById("visibility").innerHTML += weatherData.visibility;
+  document.getElementById("air").innerHTML += airQualityMap.get(airData.list[0].main.aqi);
 }
 
 /**
@@ -37,13 +61,12 @@ async function getLocation() {
  * @param units metrics or imperial, if left unfilled it would be metric
  * @param return the data json object containing info
  */
-async function getWeather(lat, lon, units = "metric") {
+async function getWeather(lat, lon, unit) {
   const apiKey = "75e14ed0cc1e9172da2f18160c44f735";
-  const apiUrl = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=${units}&appid=${apiKey}`;
+  const apiUrl = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=${unit}&appid=${apiKey}`;
   try {
     const response = await fetch(apiUrl);
     const data = await response.json();
-    console.log(data)
     return data;
   }
 
@@ -66,11 +89,25 @@ async function getExactAddress(lat, lon) {
   try {
     const response = await fetch(apiUrl);
     const data = await response.json();
-    console.log(data)
     return data;
   }
   catch (error) {
-    console.log("OpenWeather API fails");
+    console.log("Geoapify API fails");
+    console.log(error);
+    return null;
+  }
+}
+
+async function getAirQuality(lat, lon) {
+  const apiKey = "75e14ed0cc1e9172da2f18160c44f735";
+  const apiUrl = `http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+  try {
+    const response = await fetch(apiUrl);
+    const airData = await response.json();
+    return airData;
+  }
+  catch (error) {
+    console.log("OpenWeather Air Quality API fails");
     console.log(error);
     return null;
   }
@@ -89,6 +126,15 @@ function getConciseAddr(jsonObj) {
       ret = data.city + ", " + data.country;
     }
     return ret;
+}
+
+/**
+ * Change the measurement to 'C' or 'F' (metrics vs imperial)
+ * @param {*} sys: 'C' or 'F' 
+ */
+function changeSystem(unit) {
+  localStorage.setItem("unit", unit);
+  location.reload();
 }
 
 

@@ -6,30 +6,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Weather</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="weatherIcon.png" alt="Weather Icon">
 </head>
 <body>
     <div id="location">Hanoi, Vietnam</div>
     <div class="temperature-container">
-        <div id="icon">Icon</div>
+        <div id="icon">
+            <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="Weather Icon" id="imgIcon">
+        </div>
         <div id="temp">30</div>
-        <div id="system">C | F</div>
+        <div id="system">
+            <div onClick="changeSystem('metric')">C</div>
+            <div onClick="changeSystem('imperial')">F</div>
+        </div>
     </div>
     <div id="description">Cloudy</div>
     <div id="update-time">Updated as of 12:03 AM</div>
     <div class="row1">
-        <div>Feels Like</div>
-        <div>Wind Speed</div>
-        <div>Humidity</div>
+        <div class="row-elem" id = "feels">Feels Like&ensp;</div>
+        <div class="row-elem" id = "windSpeed">Wind Speed&ensp;</div>
+        <div class="row-elem" id = "humidity">Humidity&ensp;</div>
     </div>
     <div class="row2">
-        <div>Visibility</div>
-        <div>Air Quality: Good</div>
+        <div class="row-elem" id="visibility">Visibility&ensp;</div>
+        <div class="row-elem" id="air">Air Quality&ensp;</div>
     </div>
     
 
 
-    <!-- script goes here -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.31/moment-timezone-with-data.min.js"></script> -->
-    <!-- <script src="script.js"></script> -->
+    <!-- script -->
+    <script src="script.js"></script> 
 </body>
 </html>
