@@ -30,12 +30,11 @@ async function main() {
   document.getElementById("description").innerHTML = weatherData.weather[0].description;
   const iconLink = `http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`
   document.getElementById("imgIcon").src = iconLink;
-  let conciseTemp = Math.round(weatherData.main.temp * 10) / 10
-  document.getElementById("temp").innerHTML = conciseTemp;
-  document.getElementById("feels").innerHTML +=  weatherData.main.feels_like;
-  document.getElementById("windSpeed").innerHTML += weatherData.wind.speed;
-  document.getElementById("humidity").innerHTML += weatherData.main.humidity;
-  document.getElementById("visibility").innerHTML += weatherData.visibility;
+  document.getElementById("temp").innerHTML = getConciseNumber( weatherData.main.temp)+ "\u00B0C";
+  document.getElementById("feels").innerHTML +=  getConciseNumber(weatherData.main.feels_like)+ "\u00B0C";
+  document.getElementById("windSpeed").innerHTML += weatherData.wind.speed + " m/s";
+  document.getElementById("humidity").innerHTML += weatherData.main.humidity + "%";
+  document.getElementById("visibility").innerHTML += weatherData.visibility + " m";
   document.getElementById("air").innerHTML += airQualityMap.get(airData.list[0].main.aqi);
 }
 
@@ -51,7 +50,7 @@ async function getLocation() {
   } catch (error) {
     console.log(error);
   }
-  return [null, null];
+  return [21.0278, 105.8342]; // Coordinates of Hanoi
 }
 
 /**
@@ -128,6 +127,13 @@ function getConciseAddr(jsonObj) {
     return ret;
 }
 
+/**
+ * @param number
+ * @returns number rounded to 1 decimal places
+ */
+function getConciseNumber(num) {
+  return Math.round(num * 10) / 10;
+}
 /**
  * Change the measurement to 'C' or 'F' (metrics vs imperial)
  * @param {*} sys: 'C' or 'F' 
