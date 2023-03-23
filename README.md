@@ -1,5 +1,5 @@
 # Weather-App
-My weather app in development \
+A Weather App that displays real time weather data in your area
 Link: https://longatgithub.github.io/Weather-App/ 
 
 # Manual

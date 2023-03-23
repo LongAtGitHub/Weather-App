@@ -1,3 +1,5 @@
+
+
 // calling main
 main();
 
@@ -28,7 +30,7 @@ async function main() {
   // Change the html text display
   document.getElementById("location").innerHTML = conciseAddr;
   document.getElementById("description").innerHTML = weatherData.weather[0].description;
-  const iconLink = `http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`
+  const iconLink = `https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`
   document.getElementById("imgIcon").src = iconLink;
   document.getElementById("temp").innerHTML = getConciseNumber( weatherData.main.temp)+ "\u00B0C";
   document.getElementById("feels").innerHTML +=  getConciseNumber(weatherData.main.feels_like)+ "\u00B0C";
@@ -61,8 +63,9 @@ async function getLocation() {
  * @param return the data json object containing info
  */
 async function getWeather(lat, lon, unit) {
+  // const apiKey = process.env.OPEN_WEATHER_API_KEY;
   const apiKey = "75e14ed0cc1e9172da2f18160c44f735";
-  const apiUrl = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=${unit}&appid=${apiKey}`;
+  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=${unit}&appid=${apiKey}`;
   try {
     const response = await fetch(apiUrl);
     const data = await response.json();
@@ -99,7 +102,7 @@ async function getExactAddress(lat, lon) {
 
 async function getAirQuality(lat, lon) {
   const apiKey = "75e14ed0cc1e9172da2f18160c44f735";
-  const apiUrl = `http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+  const apiUrl = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`;
   try {
     const response = await fetch(apiUrl);
     const airData = await response.json();
